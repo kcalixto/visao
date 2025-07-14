@@ -3,8 +3,12 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   create-tag:
+    permissions: write-all
     uses: ./.github/workflows/create-tag.yaml
 
   deploy-api:
