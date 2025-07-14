@@ -1,7 +1,10 @@
 name: Create Tag
 on:
-  push:
-    branches: [main]
+  workflow_call:
+    outputs:
+      tag:
+        description: "Created tag"
+        value: ${{ jobs.create-tag.outputs.tag }}
 
 jobs:
   create-tag:
