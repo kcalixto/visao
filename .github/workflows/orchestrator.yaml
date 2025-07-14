@@ -1,20 +1,20 @@
-name: Deployment Orchestrator
+name: Orchestrator
 on:
   push:
     branches: [main]
 
 jobs:
   create-tag:
-    uses: ./.github/workflows/create-tag.yml
+    uses: ./.github/workflows/create-tag.yaml
 
   deploy-api:
     needs: create-tag
-    uses: ./.github/workflows/deploy-api.yml
+    uses: ./.github/workflows/deploy-api.yaml
     with:
       tag: ${{ needs.create-tag.outputs.tag }}
 
   deploy-jobs:
     needs: create-tag
-    uses: ./.github/workflows/deploy-jobs.yml
+    uses: ./.github/workflows/deploy-jobs.yaml
     with:
       tag: ${{ needs.create-tag.outputs.tag }}
