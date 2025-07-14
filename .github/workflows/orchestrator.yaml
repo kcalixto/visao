@@ -11,15 +11,18 @@ jobs:
   create-tag:
     permissions: write-all
     uses: ./.github/workflows/create-tag.yaml
+    secrets: inherit
 
   deploy-api:
     needs: create-tag
     uses: ./.github/workflows/deploy-api.yaml
+    secrets: inherit
     with:
       tag: ${{ needs.create-tag.outputs.tag }}
 
   deploy-jobs:
     needs: create-tag
     uses: ./.github/workflows/deploy-jobs.yaml
+    secrets: inherit
     with:
       tag: ${{ needs.create-tag.outputs.tag }}
