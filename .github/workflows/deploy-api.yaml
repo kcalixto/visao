@@ -1,0 +1,17 @@
+name: Deploy API
+on:
+  workflow_call:
+    inputs:
+      tag:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+      - name: Deploy API
+        run: echo "Deploying API with tag ${{ inputs.tag }}"
