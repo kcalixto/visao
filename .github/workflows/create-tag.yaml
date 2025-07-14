@@ -6,8 +6,12 @@ on:
         description: "Created tag"
         value: ${{ jobs.create-tag.outputs.tag }}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
 jobs:
   create-tag:
+    permissions: write-all
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.create_tag.outputs.new_tag }}
